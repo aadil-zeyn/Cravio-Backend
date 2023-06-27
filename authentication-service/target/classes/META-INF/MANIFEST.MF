@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: 235929
+Build-Jdk: 17.0.1
+Implementation-Title: authentication-service
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.cravio
+Implementation-URL: https://spring.io/projects/spring-boot/authenticatio
+ n-service
+Created-By: Maven Integration for Eclipse
+

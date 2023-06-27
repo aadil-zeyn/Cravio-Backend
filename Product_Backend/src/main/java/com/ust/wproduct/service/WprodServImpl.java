@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ust.wproduct.entity.Wproduct;
+import com.ust.wproduct.exception.ProductAlreadyExists;
 import com.ust.wproduct.repository.WproRepo;
 
 @Service
@@ -15,9 +16,16 @@ public class WprodServImpl implements WprodServ {
 
 	
 	//@Override
-	public Wproduct addProduct(Wproduct prd) {
-		Wproduct prdSaved=repo.save(prd);
-		return prdSaved;}
+	public Wproduct addProduct(Wproduct prd) throws ProductAlreadyExists{
+		Wproduct prodExists = viewProd(prd.getProduct());
+		if(prodExists != null) {
+			throw new ProductAlreadyExists();
+		}
+		else {
+			Wproduct prdSaved=repo.save(prd);
+			return prdSaved;
+		}
+	}
 
 	//@Override
 	public List<Wproduct> viewAllProd(){
