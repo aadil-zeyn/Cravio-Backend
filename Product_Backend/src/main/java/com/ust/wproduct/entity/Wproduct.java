@@ -25,48 +25,109 @@ public class Wproduct {
 	@Column(name = "restname")
 	private String restname;
 	
+//	public Wproduct() {
+//		super();
+//	}
+//	public Wproduct(String product, int price, String image, String description, String restname) {
+//		super();
+//		this.product = product;
+//		this.price = price;
+//		this.image = image;
+//		this.description = description;
+//		this.restname = restname;
+//	}
+//	public String getProduct() {
+//		return product;
+//	}
+//	public void setProduct(String product) {
+//		this.product = product;
+//	}
+//	public int getPrice() {
+//		return price;
+//	}
+//	public void setPrice(int price) {
+//		this.price = price;
+//	}
+//	public String getImage() {
+//		return image;
+//	}
+//	public void setImage(String image) {
+//		this.image = image;
+//	}
+//	public String getDescription() {
+//		return description;
+//	}
+//	public void setDescription(String description) {
+//		this.description = description;
+//	}
+//	public String getRestname() {
+//		return restname;
+//	}
+//	public void setRestname(String restname) {
+//		this.restname = restname;
+//	}
+//	public int getId() {
+//		return id;
+//	}
+
+
 	public Wproduct() {
-		super();
 	}
-	public Wproduct(String product, int price, String image, String description, String restname) {
-		super();
+
+	public Wproduct(int id, String product, int price, String image, String description, String restname) {
+		this.id = id;
 		this.product = product;
 		this.price = price;
 		this.image = image;
 		this.description = description;
 		this.restname = restname;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getProduct() {
 		return product;
 	}
+
 	public void setProduct(String product) {
 		this.product = product;
 	}
+
 	public int getPrice() {
 		return price;
 	}
+
 	public void setPrice(int price) {
 		this.price = price;
 	}
+
 	public String getImage() {
 		return image;
 	}
+
 	public void setImage(String image) {
 		this.image = image;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public String getRestname() {
 		return restname;
 	}
+
 	public void setRestname(String restname) {
 		this.restname = restname;
 	}
-	
-	
-	 
 }

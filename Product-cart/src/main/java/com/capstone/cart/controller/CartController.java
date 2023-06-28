@@ -62,16 +62,16 @@ public class  CartController {
         return ResponseEntity.ok("Cart deleted successfully.");
     }
 
-//	//to increment the quantity of items in cart
-//	@PutMapping("cart/incrementUpdateqQuantity/{cartid}")
-//	public ResponseEntity<Cart> iupdateQuantity(@PathVariable Long cartid){
-//		return ResponseEntity.ok(cartServ.iupdateQuantity(cartid));
-//	}
-//	//to decrement the quantity of items in cart
-//	@PutMapping("cart/decrementUpdateQuantity/{cartid}")
-//	public ResponseEntity<Cart> dupdateQuantity(@PathVariable Long cartid){
-//		return ResponseEntity.ok(cartServ.dupdateQuantity(cartid));
-//	}
+	//to increment the quantity of items in cart
+	@PutMapping("cart/incrementUpdateQuantity/{cartid}")
+	public ResponseEntity<Cart> iupdateQuantity(@PathVariable Long cartid){
+		return ResponseEntity.ok(cartServ.iupdateQuantity(cartid));
+	}
+	//to decrement the quantity of items in cart
+	@PutMapping("cart/decrementUpdateQuantity/{cartid}")
+	public ResponseEntity<Cart> dupdateQuantity(@PathVariable Long cartid){
+		return ResponseEntity.ok(cartServ.dupdateQuantity(cartid));
+	}
 
 
 }

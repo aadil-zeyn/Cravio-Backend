@@ -13,6 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin("http://localhost:4200")
 public class UserController {
 
     @Autowired
@@ -48,5 +49,10 @@ public class UserController {
     @PreAuthorize("hasRole('KitchenStaff')")
     public String forKitchenstaff(){
         return "This URL is only accessible to the kitchen staff";
+    }
+
+    @GetMapping({"/getUserName/{userName}"})
+    public  String getUserName(@PathVariable String userName){
+        return userService.getUserName(userName);
     }
 }

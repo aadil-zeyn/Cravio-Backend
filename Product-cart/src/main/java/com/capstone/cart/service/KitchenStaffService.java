@@ -52,4 +52,8 @@ public class KitchenStaffService {
     public List<Cart> getAllOrdersbyRestuarentname(String restName) {
         return cartRepository.findAllByRestName(restName);
     }
+
+    public List<Cart> getAllOrdersbyUsername(String username) {
+        return cartRepository.findAllByUsername(username);
+    }
 }

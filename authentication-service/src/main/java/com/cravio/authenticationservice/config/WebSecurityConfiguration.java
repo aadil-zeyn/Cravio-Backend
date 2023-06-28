@@ -42,7 +42,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors();
         httpSecurity.csrf().disable()
-                .authorizeRequests().antMatchers("/api/auth/authenticate", "/api/auth/registerNewUser","/api/auth/registerNewKitchenStaff").permitAll() // we don't want these endpoints to authenticate
+                .authorizeRequests().antMatchers("/api/auth/authenticate", "/api/auth/registerNewUser","/api/auth/registerNewKitchenStaff","/api/auth/getUserName/*").permitAll() // we don't want these endpoints to authenticate
                 .antMatchers(HttpHeaders.ALLOW).permitAll()
                 .anyRequest().authenticated()
                 .and()

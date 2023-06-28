@@ -62,10 +62,12 @@ public class CartService {
 		if (opt.isPresent()) {
 			exist = opt.get();
 			exist.setQuantity(exist.getQuantity() + 1);
+			exist.setTotal(exist.getQuantity() * c.getPrice());
 			return cartRepo.save(exist);
 		} else {
 			c.setStatus("In progress");
-			c.setQuantity(1l);
+			c.setQuantity(1L);
+			c.setTotal(c.getQuantity() * c.getPrice());
 			Cart saveCart = cartRepo.save(c);
 			System.out.println("added");
 			return saveCart;
@@ -104,31 +106,31 @@ public class CartService {
 //		mailSender.send(message);
 //		System.out.println("Mail Send...");
 //	}
-//
-//	/**
-//	 * Updates the quantity of a Cart by incrementing it by 1.
-//	 *
-//	 * @param cartid the cartId of the Cart to update
-//	 * @return the updated Cart object
-//	 */
-//	public Cart iupdateQuantity(Long cartid) {
-//		Cart c = cartRepo.findById(cartid).orElse(null);
-//		c.setQuantity(c.getQuantity() + 1);
-//		cartRepo.save(c);
-//		return c;
-//	}
-//
-//	/**
-//	 * Updates the quantity of a Cart by decrementing it by 1.
-//	 *
-//	 * @param cartid the cartId of the Cart to update
-//	 * @return the updated Cart object
-//	 */
-//	public Cart dupdateQuantity(Long cartid) {
-//		Cart c = cartRepo.findById(cartid).orElse(null);
-//		if(c.getQuantity()>0)
-//		c.setQuantity(c.getQuantity() - 1);
-//		cartRepo.save(c);
-//		return c;
-//	}
+
+	/**
+	 * Updates the quantity of a Cart by incrementing it by 1.
+	 *
+	 * @param cartid the cartId of the Cart to update
+	 * @return the updated Cart object
+	 */
+	public Cart iupdateQuantity(Long cartid) {
+		Cart c = cartRepo.findById(cartid).orElse(null);
+		c.setQuantity(c.getQuantity() + 1);
+		cartRepo.save(c);
+		return c;
+	}
+
+	/**
+	 * Updates the quantity of a Cart by decrementing it by 1.
+	 *
+	 * @param cartid the cartId of the Cart to update
+	 * @return the updated Cart object
+	 */
+	public Cart dupdateQuantity(Long cartid) {
+		Cart c = cartRepo.findById(cartid).orElse(null);
+		if(c.getQuantity()>0)
+		c.setQuantity(c.getQuantity() - 1);
+		cartRepo.save(c);
+		return c;
+	}
 }

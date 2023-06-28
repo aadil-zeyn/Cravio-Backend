@@ -29,6 +29,11 @@ public class KitchenStaffController {
         return ResponseEntity.ok(service.getAllOrdersbyRestuarentname(restName));
     }
 
+    @GetMapping("/ordersbyusername/{username}")
+    public ResponseEntity<List<Cart>> getAllOrdersbyUsername(@PathVariable String username){
+        return ResponseEntity.ok(service.getAllOrdersbyUsername(username));
+    }
+
     @PutMapping("/orders/{cartId}")
     public ResponseEntity<?> updateStatus(@PathVariable Long cartId) throws CartnotFoundException {
         return ResponseEntity.ok(service.updateStatus(cartId));

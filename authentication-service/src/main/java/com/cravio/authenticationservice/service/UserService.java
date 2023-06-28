@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 @Service
@@ -46,6 +47,7 @@ public class UserService {
 
         User adminUser = new User();
         adminUser.setUserName("admin");
+        adminUser.setId( IdGenerator.generateUniqueId());
         adminUser.setUserPassword(getEncodedPassword("password"));
         adminUser.setUserFirstName("admin_first");
         adminUser.setUserLastName("admin_last");
@@ -58,6 +60,7 @@ public class UserService {
 
     public User registerNewUser(UserRegistrationRequest userRegistrationRequest) {
         User user = new User();
+        user.setId( IdGenerator.generateUniqueId());
         user.setUserName(userRegistrationRequest.getUserName());
         user.setUserFirstName(userRegistrationRequest.getUserFirstName());
         user.setUserLastName(userRegistrationRequest.getUserLastName());
@@ -73,9 +76,10 @@ public class UserService {
 
     public User registerNewKitchenStaff(UserRegistrationRequest userRegistrationRequest) {
         User user = new User();
+        user.setId( IdGenerator.generateUniqueId());
         user.setUserName(userRegistrationRequest.getUserName());
         user.setUserFirstName(userRegistrationRequest.getUserFirstName());
-        user.setUserLastName("Restuarent");
+        user.setUserLastName("Restaurant");
         user.setUserPassword(getEncodedPassword(userRegistrationRequest.getUserPassword()));
         user.setUserAddress("Not Applicable");
         Role userRole = roleRepository.findById("KitchenStaff").orElseThrow(() -> new RuntimeException("KitchenStaff role not found"));
@@ -91,5 +95,22 @@ public class UserService {
 
     private String getEncodedPassword(String password) {
         return passwordEncoder.encode(password);
+    }
+
+    public String getUserName(String userName) {
+        User user=userRepository.findById(userName).orElse(null);
+        return user.getUserFirstName();
+    }
+
+
+    public class IdGenerator {
+
+        private static final long MIN_VALUE = 1000000000000000L; // Minimum value for the generated ID
+
+        public static long generateUniqueId() {
+            Random random = new Random();
+            long id = random.nextLong();
+            return Math.abs(id) + MIN_VALUE;
+        }
     }
 }

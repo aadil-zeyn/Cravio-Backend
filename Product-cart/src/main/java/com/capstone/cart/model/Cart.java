@@ -33,9 +33,21 @@ public class Cart {
 
 	private String status;
     private Long quantity;
-
+	private Long total;
 	public Cart() {
 
+	}
+
+	public Cart(Long cartid, String username, String restName, Long prodid, String prodname, Long price, String status, Long quantity, Long total) {
+		this.cartid = cartid;
+		this.username = username;
+		this.restName = restName;
+		this.prodid = prodid;
+		this.prodname = prodname;
+		this.price = price;
+		this.status = status;
+		this.quantity = quantity;
+		this.total = total;
 	}
 
 	public Long getCartid() {
@@ -50,7 +62,7 @@ public class Cart {
 		return username;
 	}
 
-	public void setUsername( String username) {
+	public void setUsername(String username) {
 		this.username = username;
 	}
 
@@ -102,14 +114,11 @@ public class Cart {
 		this.quantity = quantity;
 	}
 
-	public Cart(Long cartid, String username, String restName, Long prodid, String prodname, Long price, String status, Long quantity) {
-		this.cartid = cartid;
-		this.username = username;
-		this.restName = restName;
-		this.prodid = prodid;
-		this.prodname = prodname;
-		this.price = price;
-		this.status = status;
-		this.quantity = quantity;
+	public Long getTotal() {
+		return total;
+	}
+
+	public void setTotal(Long total) {
+		this.total = total;
 	}
 }
