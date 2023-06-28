@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ust.wproduct.entity.Restaurant;
 import com.ust.wproduct.entity.Wproduct;
+import com.ust.wproduct.exception.ProductAlreadyExistsException;
 import com.ust.wproduct.service.RestaurantService;
 import com.ust.wproduct.service.WprodServ;
 
@@ -33,8 +34,14 @@ public class WproductController {
 	@PostMapping("/addProd")
 	public ResponseEntity<?> addPrd(@RequestBody Wproduct prd)
 	{
-		Wproduct prd1 = PServ.addProduct(prd);
-		return new ResponseEntity<Wproduct>(prd1,HttpStatus.OK);
+		try {
+			Wproduct prd1 = PServ.addProduct(prd);
+			return new ResponseEntity<Wproduct>(prd1,HttpStatus.OK);
+		}
+		catch(ProductAlreadyExistsException e) {
+			return new ResponseEntity<String>("Product Already Exists",HttpStatus.CONFLICT);
+		}
+		
 	}
 	@GetMapping("/viewAllProd")
 	public ResponseEntity<?> showAllProd(){
