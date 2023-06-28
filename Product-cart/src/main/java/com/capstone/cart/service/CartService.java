@@ -59,7 +59,7 @@ public class CartService {
 	public Cart addCart(Cart c) {
 		Cart exist = null;
 		Optional<Cart> opt = cartRepo.findByProdid(c.getProdid());
-		if (opt.isPresent()) {
+		if (opt.isPresent()&&(opt.get().getUsername()==c.getUsername())) {
 			exist = opt.get();
 			exist.setQuantity(exist.getQuantity() + 1);
 			exist.setTotal(exist.getQuantity() * c.getPrice());
