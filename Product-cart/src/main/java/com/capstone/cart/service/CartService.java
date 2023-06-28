@@ -58,8 +58,8 @@ public class CartService {
 	@Transactional
 	public Cart addCart(Cart c) {
 		Cart exist = null;
-		Optional<Cart> opt = cartRepo.findByProdid(c.getProdid());
-		if (opt.isPresent()&&(opt.get().getUsername()==c.getUsername())) {
+		Optional<Cart> opt = cartRepo.findByProdidAndUsername(c.getProdid(), c.getUsername());
+		if (opt.isPresent()) {
 			exist = opt.get();
 			exist.setQuantity(exist.getQuantity() + 1);
 			exist.setTotal(exist.getQuantity() * c.getPrice());
