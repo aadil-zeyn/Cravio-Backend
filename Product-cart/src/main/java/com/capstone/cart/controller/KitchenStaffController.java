@@ -2,6 +2,7 @@ package com.capstone.cart.controller;
 
 import com.capstone.cart.Exception.CartnotFoundException;
 import com.capstone.cart.model.Cart;
+import com.capstone.cart.model.Orders;
 import com.capstone.cart.repository.CartRepository;
 import com.capstone.cart.service.KitchenStaffService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,23 +20,23 @@ public class KitchenStaffController {
 
     //to retrive all orders
     @GetMapping("/orders")
-    public ResponseEntity<List<Cart>> getAllOrders(){
+    public ResponseEntity<List<Orders>> getAllOrders(){
         return ResponseEntity.ok(service.getAllOrders());
     }
 
     //get item by res
     @GetMapping("/ordersbyrestuarent/{restName}")
-    public ResponseEntity<List<Cart>> getAllOrdersbyRestuarentname(@PathVariable String restName){
+    public ResponseEntity<List<Orders>> getAllOrdersbyRestuarentname(@PathVariable String restName){
         return ResponseEntity.ok(service.getAllOrdersbyRestuarentname(restName));
     }
 
     @GetMapping("/ordersbyusername/{username}")
-    public ResponseEntity<List<Cart>> getAllOrdersbyUsername(@PathVariable String username){
+    public ResponseEntity<List<Orders>> getAllOrdersbyUsername(@PathVariable String username){
         return ResponseEntity.ok(service.getAllOrdersbyUsername(username));
     }
 
-    @PutMapping("/orders/{cartId}")
-    public ResponseEntity<?> updateStatus(@PathVariable Long cartId) throws CartnotFoundException {
-        return ResponseEntity.ok(service.updateStatus(cartId));
+    @PutMapping("/orders/{orderid}")
+    public ResponseEntity<?> updateStatus(@PathVariable Long orderid) throws CartnotFoundException {
+        return ResponseEntity.ok(service.updateStatus(orderid));
     }
 }

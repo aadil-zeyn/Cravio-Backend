@@ -86,26 +86,6 @@ public class CartService {
 		cartRepo.deleteByCartidAndUsername(cartId, username);
 		System.out.println("deleted");
 	}
-//
-//	@Autowired
-//	private JavaMailSender mailSender;
-//
-//	/**
-//	 * Sends a simple email using the provided details.
-//	 *
-//	 * @param toEmail  the recipient's email address
-//	 * @param subject  the email subject
-//	 * @param body     the email body
-//	 */
-//	public void sendSimpleEmail(String toEmail, String subject, String body) {
-//		SimpleMailMessage message = new SimpleMailMessage();
-//		message.setFrom("farmersust@gmail.com");
-//		message.setTo(toEmail);
-//		message.setText(body);
-//		message.setSubject(subject);
-//		mailSender.send(message);
-//		System.out.println("Mail Send...");
-//	}
 
 	/**
 	 * Updates the quantity of a Cart by incrementing it by 1.
@@ -128,9 +108,24 @@ public class CartService {
 	 */
 	public Cart dupdateQuantity(Long cartid) {
 		Cart c = cartRepo.findById(cartid).orElse(null);
-		if(c.getQuantity()>0)
+		if(c.getQuantity()>1)
 		c.setQuantity(c.getQuantity() - 1);
 		cartRepo.save(c);
 		return c;
 	}
+
+	/**
+	 * Deletes all carts associated with a specific username.
+	 *
+	 * @param username the username for which to delete the carts
+	 */
+	@Transactional
+	public void deleteCartByUsername(String username) {
+		// Delete all carts associated with the username
+		cartRepo.deleteAllByUsername(username);
+
+		// Log a message to indicate the deletion
+		System.out.println("Carts deleted for username: " + username);
+	}
+
 }

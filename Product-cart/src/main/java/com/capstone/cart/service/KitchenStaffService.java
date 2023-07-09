@@ -2,7 +2,9 @@ package com.capstone.cart.service;
 
 import com.capstone.cart.Exception.CartnotFoundException;
 import com.capstone.cart.model.Cart;
+import com.capstone.cart.model.Orders;
 import com.capstone.cart.repository.CartRepository;
+import com.capstone.cart.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,14 +15,14 @@ import java.util.List;
 @Service
 public class KitchenStaffService {
     @Autowired
-    private CartRepository cartRepository;
+    private OrderRepository cartRepository;
 
     /**
      * Retrieves all orders.
      *
      * @return the list of all Cart objects
      */
-    public List<Cart> getAllOrders() {
+    public List<Orders> getAllOrders() {
         return cartRepository.findAll();
     }
 
@@ -33,7 +35,7 @@ public class KitchenStaffService {
      * @throws CartnotFoundException if the order with the specified cartId is not found
      */
     public Object updateStatus(Long cartId) throws CartnotFoundException {
-        Cart c = cartRepository.findById(cartId).orElse(null);
+        Orders c = cartRepository.findById(cartId).orElse(null);
         if (c != null) {
             c.setStatus("Ready");
             cartRepository.save(c);
@@ -49,11 +51,11 @@ public class KitchenStaffService {
      * @param restName the name of the restaurant
      * @return the list of Cart objects for the specified restaurant name
      */
-    public List<Cart> getAllOrdersbyRestuarentname(String restName) {
+    public List<Orders> getAllOrdersbyRestuarentname(String restName) {
         return cartRepository.findAllByRestName(restName);
     }
 
-    public List<Cart> getAllOrdersbyUsername(String username) {
+    public List<Orders> getAllOrdersbyUsername(String username) {
         return cartRepository.findAllByUsername(username);
     }
 }

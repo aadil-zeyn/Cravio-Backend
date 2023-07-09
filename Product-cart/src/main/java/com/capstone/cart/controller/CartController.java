@@ -2,6 +2,9 @@ package com.capstone.cart.controller;
 
 import java.util.List;
 
+import com.capstone.cart.model.Orders;
+import com.capstone.cart.service.KitchenStaffService;
+import com.capstone.cart.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +20,14 @@ public class  CartController {
 	
 	@Autowired
 	CartService cartServ;
+
+	//for orders creating seperate service class
+	@Autowired
+	private OrderService orderService;
+
+	@Autowired
+	private KitchenStaffService service;
+
 	//retrieve item by cart id
 	
 	@GetMapping("cart/viewBycart/{cId}")
@@ -44,14 +55,11 @@ public class  CartController {
 
 		Cart c = cartServ.addCart(cNew);
 
+//		orderService.addOrder(cNew);
+
 		return new ResponseEntity<Cart>(c, HttpStatus.OK);
 	}
-	
-//	@DeleteMapping("delete/{cId}/{uId}")
-//	public ResponseEntity<?> deleteCart(@PathVariable("cId") Long cId,@PathVariable("uId") Long uId){
-//		Boolean cartRes= cartServ.deleteCart(cId,uId);
-//		return new ResponseEntity<Boolean>(cartRes, HttpStatus.OK);
-//	}
+
 	//to delete an item in cart
 	
 	
@@ -61,6 +69,19 @@ public class  CartController {
 		cartServ.deleteCartByCartIdAndUsername(cartId, username);
         return ResponseEntity.ok("Cart deleted successfully.");
     }
+
+	//delete all by username
+	@DeleteMapping("cart/del/{username}")
+	public ResponseEntity<String> deleteCartbyUsername(@PathVariable String username) {
+
+		List<Cart> orders=cartServ.getByUserName(username);
+//		System.out.println(orders.toString());
+		orderService.addOrders(orders);
+
+		cartServ.deleteCartByUsername(username);
+		return ResponseEntity.ok("Cart deleted successfully.");
+	}
+
 
 	//to increment the quantity of items in cart
 	@PutMapping("cart/incrementUpdateQuantity/{cartid}")
